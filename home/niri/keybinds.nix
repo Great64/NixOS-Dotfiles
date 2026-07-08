@@ -8,6 +8,7 @@
     Mod+Return { spawn "kitty"; }
     // Mod+Space { spawn "walker"; }
     Mod+Space { spawn "rofi" "-show" "combi"; }
+    Mod+A { spawn "audio-switch"; }
 
     // --- Security ---
     Mod+Shift+Q { quit; }

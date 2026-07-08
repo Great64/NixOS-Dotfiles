@@ -4,10 +4,12 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;  # sets $EDITOR to nvim
-    viAlias = true;        
+    viAlias = true;
     vimAlias = true;
     withRuby = false;
     withPython3 = false;
+
+    extraPackages = with pkgs; [ clang-tools ];
 
     plugins = with pkgs.vimPlugins; [
       # Themes
@@ -152,6 +154,59 @@
           vim.keymap.set("n", "<leader>nl", function() require("noice").cmd("last") end,    { desc = "Noice last message" })
           vim.keymap.set("n", "<leader>nh", function() require("noice").cmd("history") end, { desc = "Noice history" })
           vim.keymap.set("n", "<leader>nd", function() require("noice").cmd("dismiss") end, { desc = "Noice dismiss" })
+        '';
+      }
+
+      # Completion
+      luasnip
+      cmp_luasnip
+      cmp-nvim-lsp
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = ''
+          local cmp     = require("cmp")
+          local luasnip = require("luasnip")
+
+          cmp.setup({
+            snippet = {
+              expand = function(args) luasnip.lsp_expand(args.body) end,
+            },
+            mapping = cmp.mapping.preset.insert({
+              ["<C-Space>"] = cmp.mapping.complete(),
+              ["<CR>"]      = cmp.mapping.confirm({ select = true }),
+              ["<C-e>"]     = cmp.mapping.abort(),
+              ["<C-n>"]     = cmp.mapping.select_next_item(),
+              ["<C-p>"]     = cmp.mapping.select_prev_item(),
+              ["<C-d>"]     = cmp.mapping.scroll_docs(4),
+              ["<C-u>"]     = cmp.mapping.scroll_docs(-4),
+            }),
+            sources = cmp.config.sources({
+              { name = "nvim_lsp" },
+              { name = "luasnip" },
+              { name = "buffer" },
+            }),
+          })
+        '';
+      }
+
+      # LSP
+      {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = ''
+          local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+          require("lspconfig").clangd.setup({ capabilities = capabilities })
+
+          vim.keymap.set("n", "gd",         vim.lsp.buf.definition,   { desc = "Go to definition" })
+          vim.keymap.set("n", "K",          vim.lsp.buf.hover,        { desc = "Hover docs" })
+          vim.keymap.set("n", "gr",         vim.lsp.buf.references,   { desc = "References" })
+          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,       { desc = "Rename symbol" })
+          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,  { desc = "Code action" })
+          vim.keymap.set("n", "<leader>e",  vim.diagnostic.open_float, { desc = "Show diagnostic" })
+          vim.keymap.set("n", "[d",         vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
+          vim.keymap.set("n", "]d",         vim.diagnostic.goto_next, { desc = "Next diagnostic" })
         '';
       }
     ];

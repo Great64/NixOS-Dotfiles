@@ -17,6 +17,7 @@
     ./shell/rofi.nix
     ./shell/editors.nix
     ./shell/claude.nix
+    ./shell/audio.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -49,6 +50,7 @@
     gcc     # C linker for cargo builds (e.g. rtk)
     nodejs  # required by caveman installer (needs node >=18)
     lazygit
+    obsidian
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];  # uv tool installs land here
