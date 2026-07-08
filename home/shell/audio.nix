@@ -8,26 +8,23 @@
       text = ''
         CARD="alsa_card.pci-0000_01_00.1"
 
-        # Build tab-separated entries: label<TAB>type<TAB>value
         entries=$(
-          # HDMI outputs as switchable profiles (NVIDIA card)
+          # HDMI profiles — reset per card, match target by name
           pactl list cards | awk '
-            /Name: alsa_card\.pci-0000_01_00\.1/ { in_card=1 }
-            in_card && /^    Profiles:/           { in_profiles=1; next }
-            in_card && in_profiles && /^        output:hdmi/ && /available: yes/ {
+            /^Card #/                                     { in_target=0 }
+            /Name: alsa_card\.pci-0000_01_00\.1/         { in_target=1 }
+            in_target && /output:hdmi/ && /available: yes/ {
               line = $0
               gsub(/^[[:space:]]+/, "", line)
-              colon = index(line, ": ")
+              colon  = index(line, ": ")
               profile = substr(line, 1, colon - 1)
               label   = substr(line, colon + 2)
               sub(/ \(sinks:.*/, "", label)
               print label "\tprofile\t" profile
             }
-            in_card && in_profiles && /^    [^ ]/ { in_profiles=0 }
-            /^Card #/ && FNR > 1               { in_card=0 }
           '
 
-          # Other sinks (headset, built-in, etc.)
+          # Non-NVIDIA sinks (headset, built-in, etc.)
           pactl list sinks | awk '
             /^[[:space:]]*Name:/        { name = $2 }
             /^[[:space:]]*Description:/ {

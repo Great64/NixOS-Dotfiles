@@ -4,6 +4,11 @@
 
 ''
   binds {
+    // --- Volume ---
+    Mod+BracketRight       { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    Mod+BracketLeft        { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    Mod+Shift+BracketLeft  { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SINK@" "toggle"; }
+
     // --- Application Launchers ---
     Mod+Return { spawn "kitty"; }
     // Mod+Space { spawn "walker"; }
