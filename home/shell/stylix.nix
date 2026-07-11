@@ -3,7 +3,7 @@
 {
   stylix = {
     enable = true;
-    # image = ./wallpaper.jpg; e
+    image = ../wallpapers/nix.png;
     base16Scheme = ./themes/monochrome.yaml;
     polarity = "dark";
     targets = {

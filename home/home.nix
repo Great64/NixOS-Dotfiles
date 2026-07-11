@@ -18,6 +18,7 @@
     ./shell/editors.nix
     ./shell/claude.nix
     ./shell/audio.nix
+    ./shell/swaylock.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

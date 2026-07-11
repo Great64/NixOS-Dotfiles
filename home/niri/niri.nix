@@ -8,6 +8,7 @@ in
     niri
     xwayland-satellite
     waybar
+    swww
   ];
 
   xdg.configFile."niri/config.kdl" = {
@@ -66,6 +67,10 @@ in
             mode "1920x1080@165.008"
             position x=4480 y=0
         }
+
+        // Wallpaper
+        spawn-at-startup "${pkgs.swww}/bin/awww-daemon"
+        spawn-at-startup "sh" "-c" "sleep 1 && ${pkgs.swww}/bin/awww img ${config.stylix.image}"
 
         // Imported Keybinds
         ${keybinds}

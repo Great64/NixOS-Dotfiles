@@ -17,6 +17,7 @@
 
     // --- Security ---
     Mod+Shift+Q { quit; }
+    Mod+Shift+L   { spawn "swaylock"; }
 
     // --- Window Management ---
     Mod+Q       { close-window; }
