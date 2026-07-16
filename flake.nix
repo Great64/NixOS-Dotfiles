@@ -17,8 +17,10 @@
 
     stylix = {
       url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";  
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    torlink.url = "github:baairon/torlink";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
