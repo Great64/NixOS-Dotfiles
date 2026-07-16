@@ -22,6 +22,7 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ inputs.torlink.overlays.default ];
   
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -52,6 +53,8 @@
     nodejs  # required by caveman installer (needs node >=18)
     lazygit
     obsidian
+    spotify
+    torlink
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];  # uv tool installs land here
