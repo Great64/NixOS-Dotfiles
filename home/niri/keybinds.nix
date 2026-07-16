@@ -48,7 +48,7 @@
     Mod+Shift+H     { move-column-left; }
     Mod+Shift+J     { move-window-down; }
     Mod+Shift+K     { move-window-up; }
-    Mod+Shift+L     { move-column-right; }
+    // Mod+Shift+L     { move-column-right; }
 
     // --- Monitor Navigation ---
     Mod+Ctrl+Left  { focus-monitor-left; }

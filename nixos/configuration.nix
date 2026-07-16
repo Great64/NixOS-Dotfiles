@@ -45,6 +45,7 @@
     teamspeak6-client
     ripgrep # needed for telescope to work
     fastfetch
+    protonvpn-cli
   ];
   
   # Bootloader.
