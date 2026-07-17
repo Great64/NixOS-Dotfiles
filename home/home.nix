@@ -55,6 +55,7 @@
     obsidian
     spotify
     torlink
+    vlc
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];  # uv tool installs land here
