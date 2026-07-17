@@ -56,6 +56,9 @@
     spotify
     torlink
     vlc
+    satty
+    grim
+    slurp
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];  # uv tool installs land here
