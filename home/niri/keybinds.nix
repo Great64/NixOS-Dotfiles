@@ -28,7 +28,7 @@
     Mod+V       { toggle-column-tabbed-display; }
     Mod+Equal   { set-column-width "+5%"; }
     Mod+Minus   { set-column-width "-5%"; }
-    Mod+Shift+S { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty -f - --early-exit --output-filename ~/Pictures/Screenshots/satty-$(date +%Y%m%d-%H%M%S).png"; }
+    Mod+Shift+S { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty -f - --early-exit --copy-command wl-copy --output-filename ~/Pictures/Screenshots/satty-$(date +%Y%m%d-%H%M%S).png"; }
 
     // --- Focus Navigation ---
     Mod+Left  { focus-column-left; }

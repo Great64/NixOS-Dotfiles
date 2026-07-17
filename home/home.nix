@@ -59,6 +59,7 @@
     satty
     grim
     slurp
+    wl-clipboard
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];  # uv tool installs land here
