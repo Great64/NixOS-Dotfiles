@@ -33,6 +33,7 @@
   programs.niri.enable = true;
   programs.xwayland.enable = true; # makes X11 apps work in Wayland
   programs.zsh.enable = true;
+  programs.steam.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
