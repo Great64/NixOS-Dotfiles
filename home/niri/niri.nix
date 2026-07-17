@@ -2,6 +2,7 @@
 
 let
   keybinds = import ./keybinds.nix;
+  windowrules = import ./windowrules.nix;
 in
 {
   home.packages = with pkgs; [
@@ -71,6 +72,9 @@ in
         // Wallpaper
         spawn-at-startup "${pkgs.swww}/bin/awww-daemon"
         spawn-at-startup "sh" "-c" "sleep 1 && ${pkgs.swww}/bin/awww img ${config.stylix.image}"
+
+        // Imported Window Rules
+        ${windowrules}
 
         // Imported Keybinds
         ${keybinds}
