@@ -19,6 +19,7 @@
     ./shell/claude.nix
     ./shell/audio.nix
     ./shell/swaylock.nix
+    ./shell/noctalia.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
