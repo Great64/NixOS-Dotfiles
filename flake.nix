@@ -22,10 +22,7 @@
 
     torlink.url = "github:baairon/torlink";
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
