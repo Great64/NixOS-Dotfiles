@@ -8,9 +8,8 @@ in
   home.packages = with pkgs; [
     niri
     xwayland-satellite
-    waybar
     swww
-  ];
+  ] ++ lib.optional (!config.programs.noctalia.enable) pkgs.waybar;
 
   xdg.configFile."niri/config.kdl" = {
     text = ''
@@ -28,6 +27,11 @@ in
                 proportion 0.66667
             }
             default-column-width { proportion 0.5; }
+
+            focus-ring {
+                active-color "#e0e0e0"
+                inactive-color "#3d3d3d"
+            }
         }
 
         // Graphical compatability
@@ -70,8 +74,10 @@ in
         }
 
         // Wallpaper
+        ${lib.optionalString (!config.programs.noctalia.enable) ''
         spawn-at-startup "${pkgs.swww}/bin/awww-daemon"
         spawn-at-startup "sh" "-c" "sleep 1 && ${pkgs.swww}/bin/awww img ${config.stylix.image}"
+        ''}
 
         // Imported Window Rules
         ${windowrules}
@@ -112,7 +118,7 @@ in
   };
 
   # Waybar service
-  systemd.user.services.waybar = {
+  systemd.user.services.waybar = lib.mkIf (!config.programs.noctalia.enable) {
     Unit = {
       Description = "Waybar status bar";
       PartOf = [ "graphical-session.target" ];
