@@ -61,6 +61,8 @@
     grim
     slurp
     wl-clipboard
+    prismlauncher
+    libreoffice
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];  # uv tool installs land here
