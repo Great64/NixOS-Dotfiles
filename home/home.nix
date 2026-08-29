@@ -16,11 +16,10 @@
     # ./shell/walker.nix
     ./shell/rofi.nix
     ./shell/editors.nix
-    ./shell/claude.nix
     ./shell/audio.nix
     ./shell/swaylock.nix
     ./shell/noctalia.nix
-  ];
+  ] ++ lib.optional (builtins.pathExists /home/great/.config/nixos-local/overrides.nix) /home/great/.config/nixos-local/overrides.nix;
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [ inputs.torlink.overlays.default ];
@@ -57,12 +56,15 @@
     spotify
     torlink
     vlc
+    mpv
     satty
     grim
     slurp
     wl-clipboard
     prismlauncher
     libreoffice
+    audacity
+    pavucontrol
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];  # uv tool installs land here
@@ -104,6 +106,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  services.easyeffects.enable = true;
 
   programs.git = {
     enable = true;
