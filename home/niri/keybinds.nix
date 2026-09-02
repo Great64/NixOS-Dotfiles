@@ -5,15 +5,17 @@
 ''
   binds {
     // --- Volume ---
-    Mod+BracketRight       { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    Mod+BracketRight       { spawn "wpctl" "set-volume" "-l" "1.5" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     Mod+BracketLeft        { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
     Mod+Shift+BracketLeft  { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    Mod+M { spawn "mic-toggle"; }
 
     // --- Application Launchers ---
     Mod+Return { spawn "kitty"; }
     // Mod+Space { spawn "walker"; }
     Mod+Space { spawn "rofi" "-show" "combi"; }
     Mod+A { spawn "audio-switch"; }
+    Mod+Shift+W { spawn "winboat-desktop"; }
 
     // --- Security ---
     Mod+Shift+Q { quit; }
