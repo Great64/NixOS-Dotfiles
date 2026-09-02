@@ -8,7 +8,8 @@
 
   imports = [
     ./niri/niri.nix
-    ./shell/terminals.nix
+    ./shell/kitty
+    ./shell/tmux.nix
     ./shell/zsh.nix
     ./shell/starship.nix
     ./browsers.nix
