@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware.nix
       ./waydroid.nix
+      ./windows.nix
     ];
 
   # Enable Flakes
@@ -32,8 +33,20 @@
   # Program toggles
   programs.niri.enable = true;
   programs.xwayland.enable = true; # makes X11 apps work in Wayland
+
+  # Screen share portal for Wayland
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ];
+    config.niri.default = [ "gnome" "gtk" ];
+  };
   programs.zsh.enable = true;
   programs.steam.enable = true;
+  programs.steam.protontricks.enable = true;
+  programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -42,11 +55,21 @@
     #  wget
     git
     pkgs.home-manager
-    discord
+    (pkgs.symlinkJoin {
+      name = "vesktop";
+      paths = [ pkgs.vesktop ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        rm $out/bin/vesktop
+        makeWrapper ${pkgs.vesktop}/bin/vesktop $out/bin/vesktop \
+          --add-flags "--ozone-platform=x11 --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --disable-features=IntensiveWakeUpThrottling,CalculateNativeWinOcclusion,UseEcoQoSForBackgroundProcess"
+      '';
+    })
     teamspeak6-client
     ripgrep # needed for telescope to work
     fastfetch
     proton-vpn-cli
+    p7zip
   ];
   
   # Bootloader.
