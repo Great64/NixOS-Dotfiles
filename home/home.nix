@@ -19,6 +19,7 @@
     ./shell/audio.nix
     ./shell/swaylock.nix
     ./shell/noctalia.nix
+    ./shell/yazi.nix
   ] ++ lib.optional (builtins.pathExists /home/great/.config/nixos-local/overrides.nix) /home/great/.config/nixos-local/overrides.nix;
 
   nixpkgs.config.allowUnfree = true;
