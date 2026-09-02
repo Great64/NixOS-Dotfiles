@@ -2,7 +2,7 @@
 
 {
   stylix = {
-    enable = true;
+    enable = false;
     image = ../wallpapers/nix.png;
     base16Scheme = ./themes/monochrome.yaml;
     polarity = "dark";
