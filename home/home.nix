@@ -16,7 +16,7 @@
     ./shell/stylix.nix
     # ./shell/walker.nix
     ./shell/rofi.nix
-    ./shell/editors.nix
+    ./shell/editors
     ./shell/audio.nix
     ./shell/swaylock.nix
     ./shell/noctalia.nix
