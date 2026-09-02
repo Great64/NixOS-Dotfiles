@@ -9,6 +9,20 @@ in
     niri
     xwayland-satellite
     swww
+    (writeShellApplication {
+      name = "mic-toggle";
+      runtimeInputs = with pkgs; [ wireplumber pipewire gnugrep coreutils ];
+      text = ''
+        id=$(wpctl status | grep 'Mic1__source ' | grep -oE '[0-9]+' | head -1 || true)
+        if [ -z "$id" ]; then exit 1; fi
+        wpctl set-mute "$id" toggle
+        if wpctl get-volume "$id" | grep -q MUTED; then
+          pw-play /run/current-system/sw/share/sounds/freedesktop/stereo/dialog-error.oga &
+        else
+          pw-play /run/current-system/sw/share/sounds/freedesktop/stereo/message.oga &
+        fi
+      '';
+    })
   ] ++ lib.optional (!config.programs.noctalia.enable) pkgs.waybar;
 
   xdg.configFile."niri/config.kdl" = {
