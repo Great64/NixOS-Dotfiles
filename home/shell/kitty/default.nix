@@ -47,12 +47,10 @@
 
       # --- Other ---
       shell_integration = "enabled";
-    };
 
-    extraConfig = ''
-      # Default theme (F5/F6 toggle between themes at runtime)
-      include themes/koda-mono.conf
-    '';
+      # --- Default theme ---
+      include = "themes/koda-mono.conf";
+    };
 
     keybindings = {
       "ctrl+shift+enter" = "new_tab";
