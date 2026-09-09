@@ -10,6 +10,7 @@
       ./hardware.nix
       ./waydroid.nix
       ./windows.nix
+      ./sd-forge.nix
     ];
 
   # Enable Flakes
