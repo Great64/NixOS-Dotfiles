@@ -10,7 +10,9 @@
       ./hardware.nix
       ./waydroid.nix
       ./windows.nix
-    ] ++ lib.optional (builtins.pathExists /home/great/.config/nixos-local/sd-forge.nix) /home/great/.config/nixos-local/sd-forge.nix;
+      "${inputs.private}/sd-forge.nix"
+      "${inputs.private}/comfyui.nix"
+    ];
 
   # Enable Flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];

@@ -21,7 +21,8 @@
     ./shell/swaylock.nix
     ./shell/noctalia.nix
     ./shell/yazi.nix
-  ] ++ lib.optional (builtins.pathExists /home/great/.config/nixos-local/overrides.nix) /home/great/.config/nixos-local/overrides.nix;
+    "${inputs.private}/overrides.nix"
+  ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [ inputs.torlink.overlays.default ];

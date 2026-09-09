@@ -23,6 +23,11 @@
     torlink.url = "github:baairon/torlink";
 
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    private = {
+      url = "path:/home/great/.config/nixos-local";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {

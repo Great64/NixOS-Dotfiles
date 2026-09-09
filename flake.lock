@@ -298,12 +298,26 @@
         "type": "github"
       }
     },
+    "private": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788931197,
+        "narHash": "sha256-fB8pi0pfRO815c7bchuUQ9mttzg7R0Lu/T+9O+HcjjM=",
+        "path": "/home/great/.config/nixos-local",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/great/.config/nixos-local",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "elephant": "elephant",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "noctalia": "noctalia",
+        "private": "private",
         "stylix": "stylix",
         "torlink": "torlink",
         "walker": "walker"
