@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports =
@@ -10,8 +10,7 @@
       ./hardware.nix
       ./waydroid.nix
       ./windows.nix
-      ./sd-forge.nix
-    ];
+    ] ++ lib.optional (builtins.pathExists /home/great/.config/nixos-local/sd-forge.nix) /home/great/.config/nixos-local/sd-forge.nix;
 
   # Enable Flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
