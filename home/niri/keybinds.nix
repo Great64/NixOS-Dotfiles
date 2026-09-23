@@ -12,7 +12,6 @@
 
     // --- Application Launchers ---
     Mod+Return { spawn "kitty"; }
-    // Mod+Space { spawn "walker"; }
     Mod+Space { spawn "rofi" "-show" "combi"; }
     Mod+A { spawn "audio-switch"; }
     Mod+Shift+W { spawn "winboat-desktop"; }
