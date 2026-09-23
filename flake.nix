@@ -9,20 +9,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    elephant.url = "github:abenz1267/elephant";
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
-
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     torlink.url = "github:baairon/torlink";
 
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     private = {
       url = "path:/home/great/.config/nixos-local";
@@ -44,7 +38,6 @@
           home-manager.users.great = {
 	    imports = [
               ./home/home.nix
-              inputs.stylix.homeModules.stylix
             ];
           };
           home-manager.extraSpecialArgs = { inherit inputs; };
