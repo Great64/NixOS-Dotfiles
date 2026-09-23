@@ -9,6 +9,7 @@
       ll = "ls -l";
       edit = "sudo -e";
       update = "cd ~/my-nixos && sudo nixos-rebuild switch --flake .#my-nixos";
+      update-lock = "cd ~/my-nixos && nix flake update";
       test = "nix-shell -p";
       waydroid = "sudo systemctl start waydroid-container && waydroid session start & waydroid show-full-ui";
       vpnc = "protonvpn connect";
