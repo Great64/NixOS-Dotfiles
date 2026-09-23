@@ -10,7 +10,7 @@
       ./hardware.nix
       ./waydroid.nix
       ./windows.nix
-      "${inputs.private}/sd-forge.nix"
+      ./tuigreet.nix
       "${inputs.private}/comfyui.nix"
     ];
 
@@ -41,14 +41,12 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gnome
-      xdg-desktop-portal-gtk
     ];
-    config.niri.default = [ "gnome" "gtk" ];
   };
   programs.zsh.enable = true;
   programs.steam.enable = true;
   programs.steam.protontricks.enable = true;
-  programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ];
+  programs.steam.extraCompatPackages = [ inputs.chaotic.packages.${pkgs.stdenv.hostPlatform.system}.proton-cachyos ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -67,33 +65,43 @@
           --add-flags "--ozone-platform=x11 --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --disable-features=IntensiveWakeUpThrottling,CalculateNativeWinOcclusion,UseEcoQoSForBackgroundProcess"
       '';
     })
-    teamspeak6-client
+    (pkgs.symlinkJoin {
+      name = "teamspeak6-client";
+      paths = [ pkgs.teamspeak6-client ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        rm $out/bin/TeamSpeak
+        makeWrapper ${pkgs.teamspeak6-client}/bin/TeamSpeak $out/bin/TeamSpeak \
+          --add-flags "--ozone-platform=x11 --disable-features=UseChromeOSDirectVideoDecoder"
+      '';
+    })
     ripgrep # needed for telescope to work
     fastfetch
     proton-vpn-cli
     p7zip
+    bambu-studio
   ];
   
-  # Bootloader.
-  #  boot.loader.systemd-boot.enable = true;
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = ["nodev"];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-  boot.loader.timeout = 60;
+  boot.loader.timeout = 0;  # hold Space during boot for menu (prev generations)
 
-  # Walker cache
+  # Parallel initrd
+  boot.initrd.systemd.enable = true;
+
+  # Force DP-2 to native 1440p so tuigreet renders correctly
+  boot.kernelParams = [ "video=DP-2:2560x1440@60" ];
+
+  # Binary caches
   nix.settings = {
     extra-substituters = [
-      "https://walker.cachix.org"
-      "https://walker-git.cachix.org"
       "https://noctalia.cachix.org"
+      "https://chaotic-nyx.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
-      "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
     ];
     # Fall back to building locally if a substituter is unreachable
     fallback = true;
@@ -112,6 +120,16 @@
   networking.networkmanager.dns = "none";
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
 
+  # Skip blocking on network at boot
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  # zram compressed swap in RAM
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
@@ -122,19 +140,15 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = false;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  # services.displayManager.defaultSession = "Niri";
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = false;
+  services.upower.enable = false;
+  services.power-profiles-daemon.enable = false;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -162,7 +176,6 @@
     description = "Great";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
     #  thunderbird
     ];
   };
