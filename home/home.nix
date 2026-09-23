@@ -13,8 +13,6 @@
     ./shell/zsh.nix
     ./shell/starship.nix
     ./browsers.nix
-    ./shell/stylix.nix
-    # ./shell/walker.nix
     ./shell/rofi.nix
     ./shell/editors
     ./shell/audio.nix
@@ -112,10 +110,20 @@
 
   services.easyeffects.enable = true;
 
+  home.pointerCursor = {
+    package = pkgs.kdePackages.breeze;
+    name = "breeze_cursors";
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   programs.git = {
     enable = true;
-    userName = "Philip";
-    userEmail = "philipozog@gmail.com";
+    settings.user = {
+      name = "Philip";
+      email = "philipozog@gmail.com";
+    };
   };
 
   # This value determines the Home Manager release that your configuration is
