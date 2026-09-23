@@ -2,6 +2,7 @@
 
 let
   enable = true;
+  wallpaper = ../wallpapers/nix.png;
 in
 {
   imports = [ inputs.noctalia.homeModules.default ];
@@ -66,7 +67,7 @@ in
       };
       wallpaper = {
         enabled = true;
-        default.path = "${config.stylix.image}";
+        default.path = "${wallpaper}";
       };
     };
   };
