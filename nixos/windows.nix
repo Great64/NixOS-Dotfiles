@@ -58,9 +58,9 @@ in
 {
   boot.kernelModules = [ "kvm-intel" "usbip-core" "usbip-host" "vhci-hcd" ];
   virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enableOnBoot = false;
   # Needed groups
-  users.users.great.extraGroups = [ "docker" "kvm" "libvirtd" ];
+  users.users.great.extraGroups = [ "docker" "kvm" ];
   environment.systemPackages = with pkgs; [
     winboat
     freerdp   # for seemless windows
@@ -72,7 +72,12 @@ in
   systemd.services.usbipd = {
     description = "usbip daemon";
     wantedBy = [ "multi-user.target" ];
-    serviceConfig.ExecStart = "${pkgs.linuxPackages.usbip}/bin/usbipd -D";
+    serviceConfig = {
+      ExecStart = "${pkgs.linuxPackages.usbip}/bin/usbipd";
+      Restart = "on-failure";
+      TimeoutStopSec = 5;
+      KillMode = "mixed";
+    };
   };
 
   # Grant non-root access to Pico (VID 2e8a) so WinBoat can bind it

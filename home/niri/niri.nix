@@ -8,7 +8,7 @@ in
   home.packages = with pkgs; [
     niri
     xwayland-satellite
-    swww
+    awww
     (writeShellApplication {
       name = "mic-toggle";
       runtimeInputs = with pkgs; [ wireplumber pipewire gnugrep coreutils ];
@@ -89,8 +89,8 @@ in
 
         // Wallpaper
         ${lib.optionalString (!config.programs.noctalia.enable) ''
-        spawn-at-startup "${pkgs.swww}/bin/awww-daemon"
-        spawn-at-startup "sh" "-c" "sleep 1 && ${pkgs.swww}/bin/awww img ${config.stylix.image}"
+        spawn-at-startup "${pkgs.awww}/bin/awww-daemon"
+        spawn-at-startup "sh" "-c" "sleep 1 && ${pkgs.awww}/bin/awww img ${../wallpapers/nix.png}"
         ''}
 
         // Imported Window Rules

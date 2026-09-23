@@ -58,6 +58,6 @@ in
       { plugin = nvim-lspconfig;  type = "lua"; config = luaFile "lsp"; }
     ];
 
-    extraLuaConfig = luaFile "init";
+    initLua = luaFile "init";
   };
 }
