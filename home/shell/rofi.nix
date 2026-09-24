@@ -7,9 +7,9 @@ in
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
-    terminal = "${pkgs.kitty}/bin/kitty";
 
-    extraConfig = {
+    settings = {
+      terminal    = "${pkgs.alacritty}/bin/alacritty";
       modi        = "combi";
       combi-modi  = "drun,run";
       show-icons  = true;

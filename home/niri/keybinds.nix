@@ -11,7 +11,7 @@
     Mod+M { spawn "mic-toggle"; }
 
     // --- Application Launchers ---
-    Mod+Return { spawn "kitty"; }
+    Mod+Return { spawn "alacritty"; }
     Mod+Space { spawn "rofi" "-show" "combi"; }
     Mod+A { spawn "audio-switch"; }
     Mod+Shift+W { spawn "winboat-desktop"; }
