@@ -9,6 +9,7 @@
   imports = [
     ./niri/niri.nix
     ./shell/kitty
+    ./shell/alacritty
     ./shell/tmux.nix
     ./shell/zsh.nix
     ./shell/starship.nix
@@ -19,6 +20,7 @@
     ./shell/swaylock.nix
     ./shell/noctalia.nix
     ./shell/yazi.nix
+    ./shell/lsd
     "${inputs.private}/overrides.nix"
   ];
 
@@ -111,6 +113,7 @@
   services.easyeffects.enable = true;
 
   home.pointerCursor = {
+    enable = true;
     package = pkgs.kdePackages.breeze;
     name = "breeze_cursors";
     size = 24;
