@@ -14,7 +14,7 @@
     Mod+Return { spawn "alacritty"; }
     Mod+Space { spawn "rofi" "-show" "combi"; }
     Mod+A { spawn "audio-switch"; }
-    Mod+Shift+W { spawn "winboat-desktop"; }
+    Mod+Ctrl+Shift+W { spawn "winboat-desktop"; }
 
     // --- Security ---
     Mod+Shift+Q { quit; }
@@ -29,6 +29,8 @@
     Mod+V       { toggle-column-tabbed-display; }
     Mod+Equal   { set-column-width "+5%"; }
     Mod+Minus   { set-column-width "-5%"; }
+    Mod+Shift+Equal { set-window-height "+5%"; }
+    Mod+Shift+Minus { set-window-height "-5%"; }
     Mod+Shift+S { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty -f - --early-exit --copy-command wl-copy --output-filename ~/Pictures/Screenshots/satty-$(date +%Y%m%d-%H%M%S).png"; }
 
     // --- Focus Navigation ---
