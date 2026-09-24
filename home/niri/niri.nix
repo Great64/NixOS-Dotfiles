@@ -3,6 +3,7 @@
 let
   keybinds = import ./keybinds.nix;
   windowrules = import ./windowrules.nix;
+  monitors = import ./monitors.nix;
 in
 {
   home.packages = with pkgs; [
@@ -57,7 +58,7 @@ in
             ELECTRON_OZONE_PLATFORM_HINT "wayland"
             QT_QPA_PLATFORMTHEME "gtk3"
             QT_QPA_PLATFORMTHEME_QT6 "gtk3"
-            TERMINAL "kitty"
+            TERMINAL "alacritty"
 
             // NVIDIA Gaming Optimizations
             __GL_GSYNC_ALLOWED "1"
@@ -71,21 +72,8 @@ in
             skip-at-startup
         }
 
-        // Monitor Configuration
-    	output "DP-1" {
-            mode "1920x1080@165.008"
-            position x=0 y=0
-    	}
-
-    	output "DP-2" {
-            mode "2560x1440@239.970"
-            position x=1920 y=0
-    	}
-
-        output "DP-3" {
-            mode "1920x1080@165.008"
-            position x=4480 y=0
-        }
+        // Imported Monitor Configuration
+        ${monitors}
 
         // Wallpaper
         ${lib.optionalString (!config.programs.noctalia.enable) ''
