@@ -15,9 +15,9 @@ Now, I am slowly fine tuning my system towards my own workflows while trying to 
 
 > I've recently been liking a clean & monochrome setup; easy on the eyes and less distractions. 
 
-![[Pasted image 20260924145910.png]]
+![desktop](screenshots/desktop-1.png)
 
-![[Pasted image 20260924145349.png]]
+![desktop](screenshots/desktop-2.png)
 
 ## :: Info
 
