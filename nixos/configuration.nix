@@ -11,6 +11,8 @@
       ./waydroid.nix
       ./windows.nix
       ./tuigreet.nix
+      ./attrs/gaming.nix
+      ./attrs/development.nix
       "${inputs.private}/comfyui.nix"
     ];
 
@@ -44,16 +46,10 @@
     ];
   };
   programs.zsh.enable = true;
-  programs.steam.enable = true;
-  programs.steam.protontricks.enable = true;
-  programs.steam.extraCompatPackages = [ inputs.chaotic.packages.${pkgs.stdenv.hostPlatform.system}.proton-cachyos ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    git
     pkgs.home-manager
     (pkgs.symlinkJoin {
       name = "vesktop";
@@ -75,11 +71,9 @@
           --add-flags "--ozone-platform=x11 --disable-features=UseChromeOSDirectVideoDecoder"
       '';
     })
-    ripgrep # needed for telescope to work
     fastfetch
     proton-vpn-cli
     p7zip
-    bambu-studio
   ];
   
   # Bootloader
@@ -91,7 +85,6 @@
   boot.initrd.systemd.enable = true;
 
   # Force DP-2 to native 1440p so tuigreet renders correctly
-  boot.kernelParams = [ "video=DP-2:2560x1440@60" ];
 
   # Binary caches
   nix.settings = {
