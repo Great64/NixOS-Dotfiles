@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   myPolicies = {
@@ -32,7 +32,6 @@ in
     enable = true;
     package = pkgs.librewolf;
     policies = myPolicies;
-    configPath = "${config.xdg.configHome}/mozilla/firefox"; 
   };
 
   home.file.".librewolf/policies/policies.json".text = builtins.toJSON myPolicies;
