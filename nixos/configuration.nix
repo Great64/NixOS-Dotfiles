@@ -14,6 +14,7 @@
       ./attrs/gaming.nix
       ./attrs/development.nix
       "${inputs.private}/comfyui.nix"
+      "${inputs.private}/extra.nix"
     ];
 
   # Enable Flakes
