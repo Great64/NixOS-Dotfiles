@@ -7,6 +7,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = "excalibur";
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
