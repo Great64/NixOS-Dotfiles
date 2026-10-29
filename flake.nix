@@ -44,5 +44,12 @@
         }
       ];
     };
+
+    nixosConfigurations.excalibur = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./nixos/hosts/excalibur/configuration.nix
+      ];
+    };
   };
 }
