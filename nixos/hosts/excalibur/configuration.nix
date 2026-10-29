@@ -42,6 +42,7 @@
     shell = pkgs.bash;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKIdT1Jk++WAICFhanW1gtPlxCybxAApSa7p3qdioX+n philipozog@gmail.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDbppwVFR2CqVQvSodjUnyoWraPHTVwHZZfqiS4VzQF macbook"
     ];
   };
 
