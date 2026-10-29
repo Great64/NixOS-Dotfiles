@@ -33,6 +33,8 @@
 
   services.tailscale.enable = true;
 
+  environment.systemPackages = [ pkgs.git ];
+
   users.users.great = {
     isNormalUser = true;
     description = "Great";
