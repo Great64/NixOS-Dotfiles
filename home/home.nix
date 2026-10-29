@@ -67,6 +67,7 @@
     prismlauncher
     libreoffice
     audacity
+    obs-studio
     pavucontrol
   ];
 
