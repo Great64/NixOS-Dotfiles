@@ -36,6 +36,10 @@
 
   environment.systemPackages = [ pkgs.git ];
 
+  environment.shellAliases = {
+    update = "cd ~/my-nixos && sudo nixos-rebuild switch --flake .#excalibur";
+  };
+
   users.users.great = {
     isNormalUser = true;
     description = "Great";
