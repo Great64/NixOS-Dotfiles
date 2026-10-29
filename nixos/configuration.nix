@@ -13,8 +13,8 @@
       ./tuigreet.nix
       ./attrs/gaming.nix
       ./attrs/development.nix
-      "${inputs.private}/comfyui.nix"
-      "${inputs.private}/extra.nix"
+      /home/great/.config/nixos-local/comfyui.nix
+      /home/great/.config/nixos-local/extra.nix
     ];
 
   # Enable Flakes

@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    "${inputs.private}/extra.nix"
+    /home/great/.config/nixos-local/extra.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
