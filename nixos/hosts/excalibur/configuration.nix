@@ -1,0 +1,42 @@
+{ config, pkgs, lib, inputs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  networking.hostName = "excalibur";
+  networking.networkmanager.enable = true;
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+
+  time.timeZone = "America/Toronto";
+  i18n.defaultLocale = "en_CA.UTF-8";
+
+  # SSH, key-only
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = [ 22 ];
+
+  users.users.great = {
+    isNormalUser = true;
+    description = "Great";
+    extraGroups = [ "wheel" ];
+    shell = pkgs.bash;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKIdT1Jk++WAICFhanW1gtPlxCybxAApSa7p3qdioX+n philipozog@gmail.com"
+    ];
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
+  system.stateVersion = "25.11";
+}
