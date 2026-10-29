@@ -17,11 +17,6 @@
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    private = {
-      url = "path:/home/great/.config/nixos-local";
-      flake = false;
-    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {

@@ -10,7 +10,7 @@
       v = "nvim";
       lg = "lazygit";
       edit = "sudo -e";
-      update = "cd ~/my-nixos && sudo nixos-rebuild switch --flake .#my-nixos";
+      update = "cd ~/my-nixos && sudo nixos-rebuild switch --flake .#my-nixos --impure";
       update-lock = "cd ~/my-nixos && nix flake update";
       nsh = "nix-shell -p";
       waydroid = "sudo systemctl start waydroid-container && waydroid session start & waydroid show-full-ui";
