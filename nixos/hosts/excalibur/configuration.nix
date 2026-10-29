@@ -28,6 +28,10 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  networking.firewall.checkReversePath = "loose";
+
+  services.tailscale.enable = true;
 
   users.users.great = {
     isNormalUser = true;
